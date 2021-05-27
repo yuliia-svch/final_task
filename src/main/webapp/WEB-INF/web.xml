@@ -1,0 +1,56 @@
+<!DOCTYPE web-app PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+    <servlet>
+        <servlet-name>add</servlet-name>
+        <servlet-class>app.servlets.AddServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>auth_user_window</servlet-name>
+        <servlet-class>app.servlets.UserWin</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>main_page</servlet-name>
+        <servlet-class>app.servlets.MainPageServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>manager_win</servlet-name>
+        <servlet-class>app.servlets.ManagerWin</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>register</servlet-name>
+        <servlet-class>app.servlets.Register</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>add</servlet-name>
+        <url-pattern>/add</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>auth_user_window</servlet-name>
+        <url-pattern>/auth_user_window</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>main_page</servlet-name>
+        <url-pattern>/main_page</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>manager_win</servlet-name>
+        <url-pattern>/manager_win</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>register</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+
+</web-app>

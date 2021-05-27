@@ -1,0 +1,11 @@
+app\entities\Direction.class
+app\entities\User$Role.class
+app\servlets\UserWin.class
+app\servlets\ManagerWin.class
+app\dao\UserDao.class
+app\servlets\Register.class
+app\entities\DBCPDataSource.class
+app\servlets\MainPageServlet.class
+app\model\Model.class
+app\servlets\AddServlet.class
+app\entities\User.class

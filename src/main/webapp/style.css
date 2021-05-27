@@ -1,0 +1,59 @@
+.header{
+    position: absolute;
+    right: 2em;
+}
+
+.cute{
+    background-color: rgb(236, 178, 222);
+    width:20em;
+    height: 35em;
+    text-align: center;
+    border-radius: 8px;
+    overflow-y: auto;
+}
+.forSubmit {
+    display: block;
+}
+.forSubmit, .register {
+    background-color: rgb(243, 88, 207);
+    border-radius: 12px;
+    height: 3em;
+    width: 8em;
+    border: none;
+    box-shadow: 0 9px rgb(165, 125, 144);
+    padding: 7px 12px;
+  }
+
+  .forSubmit:hover, .register:hover {
+    background-color: #eb03b8;
+  }
+  .forSubmit:active, .register:active {
+    background-color: #eb03b8;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+
+  label{
+    font-size: 1.2em;
+  }
+
+  input{
+    height: 2em;
+    width: 15em;
+  }
+
+  tr {
+    display: table;
+    width: 70%;
+    margin: auto;
+    color: rgb(236, 178, 222);
+  }
+
+  td, thead>tr>th {
+    width: 20%;
+    text-align: center;
+  }
+
+  p {
+    color: red;
+  }
