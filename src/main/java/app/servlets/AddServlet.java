@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -40,21 +41,26 @@ public class AddServlet extends HttpServlet {
         }
         switch(res) {
             case 'u':
+                HttpSession session = req.getSession();
+                session.setAttribute("userName",name);
                 resp.sendRedirect("auth_user_window.jsp");
                 break;
             case 'm':
+                req.setAttribute("userName",name);
                 resp.sendRedirect("manager_win.jsp");
+//                requestDispatcher = req.getRequestDispatcher("/manager_win");
+//                requestDispatcher.forward(req, resp);
                 break;
             case 'n':
                 req.setAttribute("register", "You are not registered yet");
-                RequestDispatcher requestDispatcher = req.getRequestDispatcher("add.jsp");
-                requestDispatcher.forward(req, resp);
+                RequestDispatcher requestDispatcher2 = req.getRequestDispatcher("add.jsp");
+                requestDispatcher2.forward(req, resp);
                 break;
             case 'p':
                 req.setAttribute("pass_incorr", "Password is incorrect\n" +
                         "Please, try again");
-                requestDispatcher = req.getRequestDispatcher("add.jsp");
-                requestDispatcher.forward(req, resp);
+                requestDispatcher2 = req.getRequestDispatcher("add.jsp");
+                requestDispatcher2.forward(req, resp);
         }
     }
 
