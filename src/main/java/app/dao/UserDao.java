@@ -7,32 +7,36 @@ import javax.naming.NamingException;
 import java.sql.*;
 
 public class UserDao {
-    public int registerUser(User user) throws ClassNotFoundException, SQLException {
+    public void registerUser(User user) throws ClassNotFoundException, SQLException {
         String INSERT_USERS_SQL = "INSERT INTO auth_user" +
                 "  (login, password, role) VALUES " +
                 " (?, ?, ?);";
 
-        int result = 0;
+        ResultSet rs;
 
-        Class.forName("com.mysql.jdbc.Driver");
         Connection con = DBCPDataSource.getConnection();
 
-        try (PreparedStatement preparedStatement = con.prepareStatement(INSERT_USERS_SQL)) {
+        try (PreparedStatement preparedStatement = con.prepareStatement(INSERT_USERS_SQL, Statement.RETURN_GENERATED_KEYS)) {
 
             preparedStatement.setString(1, user.getLogin());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getRole().name());
 
             System.out.println(preparedStatement);
-            result = preparedStatement.executeUpdate();
+            if(preparedStatement.executeUpdate()>0) {
+                rs = preparedStatement.getGeneratedKeys();
+                if (rs.next()) {
+                    user.setUserId(rs.getInt(1));
+                }
+            }
 
         } catch (SQLException e) {
 
             printSQLException(e);
         }
-        return result;
     }
 
+// checking if the user is already in the database
     public char isInDatabase(User user) throws ClassNotFoundException, NamingException, SQLException {
 
         String FIND_USER_SQL = "SELECT * FROM auth_user WHERE login = ? AND role = 1";
@@ -45,6 +49,7 @@ public class UserDao {
             rs = preparedStatement.executeQuery();
             if (rs.next()) {
                 if(user.getPassword().equals(rs.getString("password"))) {
+                    user.setUserId(rs.getInt(1));
                     return 'u';
                 } else {
                     return 'p';
@@ -60,6 +65,7 @@ public class UserDao {
             rs = preparedStatement.executeQuery();
             if (rs.next()) {
                 if(user.getPassword().equals(rs.getString("password"))) {
+                    user.setUserId(rs.getInt(1));
                     return 'm';
                 } else {
                     return 'p';
@@ -72,7 +78,7 @@ public class UserDao {
         }
         return 'n';
     }
-    private void printSQLException(SQLException ex) {
+    public static void printSQLException(SQLException ex) {
         for (Throwable e: ex) {
             if (e instanceof SQLException) {
                 e.printStackTrace(System.err);

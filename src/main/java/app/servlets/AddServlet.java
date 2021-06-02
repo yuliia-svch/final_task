@@ -43,13 +43,14 @@ public class AddServlet extends HttpServlet {
             case 'u':
                 HttpSession session = req.getSession();
                 session.setAttribute("userName",name);
+                session.setAttribute("id", user.getUserId());
                 resp.sendRedirect("auth_user_window.jsp");
                 break;
             case 'm':
-                req.setAttribute("userName",name);
+                session = req.getSession();
+                session.setAttribute("userName",name);
+                session.setAttribute("id", user.getUserId());
                 resp.sendRedirect("manager_win.jsp");
-//                requestDispatcher = req.getRequestDispatcher("/manager_win");
-//                requestDispatcher.forward(req, resp);
                 break;
             case 'n':
                 req.setAttribute("register", "You are not registered yet");

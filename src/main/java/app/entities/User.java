@@ -3,6 +3,7 @@ package app.entities;
 import java.util.Objects;
 
 public class User {
+    private int userId;
     private String login;
     private String password;
     private Role role;
@@ -15,6 +16,14 @@ public class User {
         this.login = name;
         this.password = password;
         this.role = Role.valueOf(role);
+    }
+
+    public void setUserId(int id) {
+        userId = id;
+    }
+
+    public int getUserId() {
+        return userId;
     }
 
     public String getLogin() {
