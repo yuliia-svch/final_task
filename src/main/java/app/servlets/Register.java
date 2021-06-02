@@ -3,6 +3,7 @@ package app.servlets;
 import app.dao.UserDao;
 import app.entities.User;
 
+import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class Register extends HttpServlet {
 
@@ -34,6 +36,17 @@ public class Register extends HttpServlet {
         User user;
         if("user".equals(position)) {
             user = new User(name, password, position);
+            try {
+                if(userDao.isInDatabase(user) != 'n') {
+                    req.setAttribute("bad_login", "This login has already been taken.\n" +
+                            "Create another one\n");
+                    RequestDispatcher requestDispatcher2 = req.getRequestDispatcher("register.jsp");
+                    requestDispatcher2.forward(req, resp);
+                    return;
+                }
+            } catch (ClassNotFoundException | SQLException | NamingException | ServletException e) {
+                e.printStackTrace();
+            }
             try {
                 userDao.registerUser(user);
             } catch (Exception e) {

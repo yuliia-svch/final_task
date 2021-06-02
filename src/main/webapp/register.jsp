@@ -15,6 +15,11 @@
             <h2>Register</h2>
             <hr/>
              <div class = "user-name">
+             <%
+                if(request.getAttribute("bad_login") != null) {
+                     out.println("<p>" + request.getAttribute("bad_login") + "</p>");
+                }
+             %>
                   <label for = "login">Please, create login</label>
                   <br>
                   <input type="text" name="userName" id="userName" minlength = "3" maxlength = "30"
