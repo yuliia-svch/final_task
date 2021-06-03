@@ -1,6 +1,9 @@
 package app.entities;
 
+import app.dao.ApplicationDao;
+
 public class Application {
+    private int id;
     private String address;
     private String baggageType;
     private double weight;
@@ -8,6 +11,7 @@ public class Application {
     private String dateOfReceival;
     private int userId;
 
+    public Application(){}
     public Application(String address, String baggageType, double weight,
                        double volume, String dor, int userId) {
         this.address = address;
@@ -16,6 +20,10 @@ public class Application {
         this.volume = volume;
         this.dateOfReceival = dor;
         this.userId = userId;
+    }
+
+    public int getAppId(){
+        return id;
     }
 
     public String getAddress() {
@@ -40,5 +48,38 @@ public class Application {
 
     public int getUserId() {
         return userId;
+    }
+
+    public String getLogin() {
+        ApplicationDao appDao = new ApplicationDao();
+        return appDao.getUserLoginById(this.userId);
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setBaggageType(String baggageType) {
+        this.baggageType = baggageType;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public void setVolume(double volume) {
+        this.volume = volume;
+    }
+
+    public void setDate(String dateOfReceival) {
+        this.dateOfReceival = dateOfReceival;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }
